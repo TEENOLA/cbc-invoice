@@ -1,0 +1,209 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prevents a white flash during mobile overscroll/rubber-banding, since that
+   bounce reveals html/body's own background, not .cbc-root's */
+html,
+body {
+  background: #fbf4e8;
+}
+html.dark,
+body.dark {
+  background: #1e1512;
+}
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* ------------------------------------------------------------------ */
+
+.cbc-root {
+  --cream: #fbf4e8;
+  --cream-deep: #f3e8d4;
+  --card: #fffdf9;
+  --choc: #3b2620;
+  --choc-soft: #6e5044;
+  --rose: #e3a7ae;
+  --rose-deep: #c97d89;
+  --caramel: #b8763e;
+  --caramel-deep: #9a5e2c;
+  --gold: #c9a227;
+  --sage: #7c9070;
+  --line: #e8d9c3;
+  --shadow: rgba(59, 38, 32, 0.1);
+  background: var(--cream);
+  color: var(--choc);
+  font-family: "Manrope", sans-serif;
+  min-height: 100vh;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.cbc-root.dark {
+  --cream: #1e1512;
+  --cream-deep: #170f0c;
+  --card: #2a1d18;
+  --choc: #f3e8d9;
+  --choc-soft: #c9b6a8;
+  --line: #4a362c;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+.cbc-display {
+  font-family: "Fraunces", serif;
+}
+.cbc-mono {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.cbc-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 6px 20px -8px var(--shadow);
+}
+
+.scallop-top {
+  position: relative;
+}
+.scallop-top::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 0;
+  right: 0;
+  height: 9px;
+  background: radial-gradient(
+      circle at 9px 0,
+      transparent 8px,
+      var(--card) 8.5px
+    )
+    0 0 / 18px 9px repeat-x;
+}
+.scallop-bottom {
+  position: relative;
+}
+.scallop-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  right: 0;
+  height: 9px;
+  background: radial-gradient(
+      circle at 9px 9px,
+      transparent 8px,
+      var(--card) 8.5px
+    )
+    0 0 / 18px 9px repeat-x;
+}
+
+.cbc-btn-primary {
+  background: var(--caramel);
+  color: #fffdf9;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.cbc-btn-primary:hover {
+  background: var(--caramel-deep);
+  transform: translateY(-1px);
+}
+
+.cbc-btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--line);
+  color: var(--choc);
+}
+.cbc-btn-outline:hover {
+  border-color: var(--caramel);
+  color: var(--caramel);
+}
+
+.cbc-input {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  color: var(--choc);
+  transition: border-color 0.15s ease;
+}
+.cbc-input:focus {
+  outline: none;
+  border-color: var(--caramel);
+}
+.cbc-input::placeholder {
+  color: var(--choc-soft);
+  opacity: 0.6;
+}
+
+.cbc-sidebar-link {
+  color: var(--choc-soft);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cbc-sidebar-link:hover {
+  background: var(--cream-deep);
+  color: var(--choc);
+}
+.cbc-sidebar-link.active {
+  background: var(--caramel);
+  color: #fffdf9;
+}
+
+.cbc-badge {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+.badge-draft {
+  background: #e8d9c3;
+  color: #6e5044;
+}
+.badge-pending {
+  background: #f3dfae;
+  color: #8a6416;
+}
+.badge-paid {
+  background: #d7e4ce;
+  color: #445e33;
+}
+.badge-overdue {
+  background: #f1c9cb;
+  color: #8c2e35;
+}
+.dark .badge-draft {
+  background: #4a362c;
+  color: #c9b6a8;
+}
+.dark .badge-pending {
+  background: #55461e;
+  color: #f0cb6a;
+}
+.dark .badge-paid {
+  background: #2f4023;
+  color: #a6d190;
+}
+.dark .badge-overdue {
+  background: #52272a;
+  color: #f0a2a6;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 8px;
+}
+
+@keyframes cbcFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cbc-animate {
+  animation: cbcFadeUp 0.35s ease both;
+}
